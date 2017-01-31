@@ -34,16 +34,13 @@ sorted_frequencies = sorted(frequencies.items(), key=operator.itemgetter(1), rev
 #==============================================================================
 
 keys,values = zip(*sorted_frequencies)
-
 df = {"Fields": keys, "values": values}
 
 
-from bokeh.charts import Bar, output_file, show, hplot
-from bokeh.charts.attributes import ColorAttr, CatAttr
-from bokeh.charts.builders.bar_builder import BarBuilder
+from bokeh.charts import Bar, output_file, show
+from bokeh.charts.attributes import CatAttr
 
-p = Bar(df, values="values",label="Fields",title="Attack Pattern Field Frequency",sort=False,legend=False)
-output_file("frequencies.html")
+p = Bar(df, values="values",label=CatAttr(columns=['Fields'],sort=False),title="Attack Pattern Field Frequency",legend=False)
 show(p)
 
 
